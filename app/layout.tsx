@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Josefin_Sans } from "next/font/google";
+import { Analytics } from "@vercel/analytics/next";
 import "./globals.css";
 
 const josefinSans = Josefin_Sans({
@@ -26,7 +27,10 @@ export default function RootLayout({
         <link rel="icon" href="/favicon-32x32.png" type="image/png" />
         <link rel="apple-touch-icon" sizes="192x192" href="/icons/icon-192x192.png" />
       </head>
-      <body className="page">{children}</body>
+      <body className="page">
+        {children}
+        <Analytics />
+      </body>
     </html>
   );
 }
