@@ -25,7 +25,7 @@ export default function Footer() {
             White Walls,<br />
             Solomon&apos;s Cave, Gr. Floor,<br />
             Tuikual South, Aizawl,<br />
-            Mizoram.!
+            Mizoram
           </address>
         </div>
 
