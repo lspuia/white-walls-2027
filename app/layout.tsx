@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Josefin_Sans } from "next/font/google";
 import { Analytics } from "@vercel/analytics/next";
+import { SpeedInsights } from "@vercel/speed-insights/next";
 import "./globals.css";
 
 const josefinSans = Josefin_Sans({
@@ -30,6 +31,7 @@ export default function RootLayout({
       <body className="page">
         {children}
         <Analytics />
+        <SpeedInsights />
       </body>
     </html>
   );
