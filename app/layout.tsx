@@ -1,20 +1,36 @@
-import type { Metadata } from "next";
-import { Josefin_Sans } from "next/font/google";
+import type { Metadata, Viewport } from "next";
+import { Lora } from "next/font/google";
 import { Analytics } from "@vercel/analytics/next";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import "./globals.css";
 
-const josefinSans = Josefin_Sans({
+const lora = Lora({
   subsets: ["latin"],
-  weight: ["300", "400", "500", "600", "700"],
+  weight: ["400", "500"],
   style: ["normal", "italic"],
-  variable: "--font-josefin-sans",
+  variable: "--font-lora",
   display: "swap",
 });
 
 export const metadata: Metadata = {
-  title: "White Walls Interior Design",
-  description: "Interior design consultancy based in Aizawl, Mizoram. Creative & functional design solutions for residential & commercial interior design projects.",
+  metadataBase: new URL("https://whitewalls.in"),
+  title: "White Walls Interior Design Studio — Website Under Construction",
+  description:
+    "While we redesign whitewalls.in, the studio remains open — drawing, drafting, and building beautiful interiors across Mizoram.",
+  // Icons come from the app/ file conventions: favicon.ico, icon.png, apple-icon.png
+  openGraph: {
+    title: "White Walls Interior Design Studio",
+    description:
+      "Our website is being rebuilt. The studio remains open — interior design across Aizawl, Mizoram.",
+    url: "https://whitewalls.in",
+    siteName: "White Walls Interior Design Studio",
+    locale: "en_IN",
+    type: "website",
+  },
+};
+
+export const viewport: Viewport = {
+  themeColor: "#f3f2f2",
 };
 
 export default function RootLayout({
@@ -23,12 +39,8 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={josefinSans.variable}>
-      <head>
-        <link rel="icon" href="/favicon-32x32.png" type="image/png" />
-        <link rel="apple-touch-icon" sizes="192x192" href="/icons/icon-192x192.png" />
-      </head>
-      <body className="page">
+    <html lang="en" className={lora.variable}>
+      <body>
         {children}
         <Analytics />
         <SpeedInsights />
