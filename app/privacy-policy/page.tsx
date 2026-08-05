@@ -118,7 +118,7 @@ export default function PrivacyPolicyPage() {
         <br />
         Phone: <a href="tel:9654956742">9654 956 742</a>
         {" / "}
-        <a href="tel:6909364955">6909 364 955</a><br />
+        <a href="tel:9862351441">9862 351 441</a><br />
         Email: <a href="mailto:kimi@whitewalls.in">kimi@whitewalls.in</a>
       </address>
 
