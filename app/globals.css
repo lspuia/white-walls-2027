@@ -361,3 +361,9 @@ img {
 .prose-page .back:hover {
   border-bottom-color: var(--color-accent);
 }
+
+/* Same link above the title, so the way out is reachable without scrolling. */
+.prose-page .back-top {
+  margin-top: 0;
+  margin-bottom: 28px;
+}

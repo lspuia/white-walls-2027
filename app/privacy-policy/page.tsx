@@ -9,6 +9,10 @@ export const metadata: Metadata = {
 export default function PrivacyPolicyPage() {
   return (
     <main className="prose-page">
+      <Link className="back back-top" href="/">
+        ← Back
+      </Link>
+
       <h1>Privacy Policy</h1>
       <p className="meta">Last updated: April 2026</p>
 
