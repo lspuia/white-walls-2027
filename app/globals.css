@@ -114,7 +114,9 @@ img {
   align-items: center;
   justify-content: center;
   position: relative;
-  padding: 48px 24px;
+  /* Horizontal padding has to clear the inner frame (inset 42px) with room to
+     spare, or the copy runs over the hairline on narrow screens. */
+  padding: 48px 62px;
 }
 
 .stack {
@@ -268,8 +270,9 @@ img {
     inset: 22px 22px 86px 22px;
   }
 
+  /* Frames tighten to 16px/22px here, so the copy can come in correspondingly. */
   .center {
-    padding: 40px 20px;
+    padding: 40px 38px;
   }
 }
 
