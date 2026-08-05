@@ -50,6 +50,13 @@ export default function UnderConstructionPage() {
       <div className="frame-outer" />
       <div className="frame-inner" />
 
+      <div className="marquee-strip">
+        <div className="marquee" aria-hidden="true">
+          <span>{MARQUEE_TEXT}</span>
+          <span>{MARQUEE_TEXT}</span>
+        </div>
+      </div>
+
       <div className="center">
         <div className="stack">
           <Image
@@ -103,13 +110,6 @@ export default function UnderConstructionPage() {
               Privacy Policy
             </Link>
           </div>
-        </div>
-      </div>
-
-      <div className="marquee-strip">
-        <div className="marquee" aria-hidden="true">
-          <span>{MARQUEE_TEXT}</span>
-          <span>{MARQUEE_TEXT}</span>
         </div>
       </div>
     </div>

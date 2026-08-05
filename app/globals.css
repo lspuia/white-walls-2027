@@ -84,13 +84,13 @@ img {
   position: relative;
   min-height: 100vh;
   display: grid;
-  grid-template-rows: 1fr var(--marquee-h);
+  grid-template-rows: var(--marquee-h) 1fr;
   overflow: hidden;
 }
 
 .dust {
   position: absolute;
-  inset: 0 0 var(--marquee-h) 0;
+  inset: var(--marquee-h) 0 0 0;
   pointer-events: none;
 }
 
@@ -101,12 +101,13 @@ img {
   pointer-events: none;
 }
 
+/* Top inset clears the marquee strip; the other three sides are the plain inset. */
 .frame-outer {
-  inset: 36px 36px 100px 36px;
+  inset: calc(36px + var(--marquee-h)) 36px 36px 36px;
 }
 
 .frame-inner {
-  inset: 42px 42px 106px 42px;
+  inset: calc(42px + var(--marquee-h)) 42px 42px 42px;
 }
 
 .center {
@@ -235,8 +236,8 @@ img {
 
 /* ── Marquee strip ─────────────────────────────────────────────────────── */
 .marquee-strip {
-  grid-row: 2;
-  border-top: 1px solid var(--color-divider);
+  grid-row: 1;
+  border-bottom: 1px solid var(--color-divider);
   display: flex;
   align-items: center;
   overflow: hidden;
@@ -263,11 +264,11 @@ img {
 /* ── Responsive ────────────────────────────────────────────────────────── */
 @media (max-width: 480px) {
   .frame-outer {
-    inset: 16px 16px 80px 16px;
+    inset: calc(16px + var(--marquee-h)) 16px 16px 16px;
   }
 
   .frame-inner {
-    inset: 22px 22px 86px 22px;
+    inset: calc(22px + var(--marquee-h)) 22px 22px 22px;
   }
 
   /* Frames tighten to 16px/22px here, so the copy can come in correspondingly. */
