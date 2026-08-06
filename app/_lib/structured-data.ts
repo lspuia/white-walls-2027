@@ -99,6 +99,49 @@ export function buildStructuredData() {
 }
 
 /**
+ * The products page, described as a page rather than as a shop.
+ *
+ * No `Product`, `Offer` or `OfferCatalog` markup here: we carry brands we have
+ * not yet listed, at prices and availability the site does not state, so any
+ * product markup would be a guess — and product markup that cannot be verified
+ * against the page is the kind Google issues manual actions for. What is true
+ * today is that this is a page about the studio's showroom stock, so that is
+ * all it claims. Product entities arrive with the real brand sub-pages.
+ *
+ * The breadcrumb is the useful part meanwhile: it tells Google that /products
+ * sits under the home page, and it is what renders in the result snippet.
+ */
+export function buildProductsStructuredData() {
+  const pageUrl = `${SITE_URL}/products`;
+
+  return {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "CollectionPage",
+        "@id": `${pageUrl}#page`,
+        url: pageUrl,
+        name: "Products — Interior Hardware, Fittings & Accessories",
+        description:
+          "The White Walls product catalogue, brand by brand — interior hardware, fittings and accessories stocked at our showroom in Tuikual South, Aizawl. Catalogue pages are being built.",
+        inLanguage: "en-IN",
+        isPartOf: { "@id": WEBSITE_ID },
+        about: { "@id": BUSINESS_ID },
+        publisher: { "@id": BUSINESS_ID },
+      },
+      {
+        "@type": "BreadcrumbList",
+        "@id": `${pageUrl}#breadcrumb`,
+        itemListElement: [
+          { "@type": "ListItem", position: 1, name: "Home", item: SITE_URL },
+          { "@type": "ListItem", position: 2, name: "Products", item: pageUrl },
+        ],
+      },
+    ],
+  };
+}
+
+/**
  * `JSON.stringify` does not escape `<`, so a stray HTML tag in any of the
  * values above could break out of the script element. None of them are
  * user-supplied today, but escaping keeps that true if they ever become so.

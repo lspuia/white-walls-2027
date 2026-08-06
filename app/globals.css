@@ -233,6 +233,13 @@ img {
   color: var(--color-accent-700);
 }
 
+.contact-links {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 24px;
+}
+
 .privacy {
   color: var(--color-neutral-500);
   border-bottom: 1px solid var(--color-divider);
@@ -380,4 +387,110 @@ img {
 .prose-page .back-top {
   margin-top: 0;
   margin-bottom: 28px;
+}
+
+/* ── Products — the prose shell, dressed closer to the home page ────────── */
+
+/* .kicker and .gold-rule are the home page's; centring there comes from the
+   flex column it sits in, so both fall left here without being overridden. */
+.prose-page .gold-rule {
+  margin: 36px 0 32px;
+}
+
+.prose-page .lede {
+  font-size: 18px;
+  line-height: 1.7;
+  color: var(--color-text);
+  margin: 20px 0 0;
+  text-wrap: pretty;
+}
+
+.prose-page h3 {
+  font-size: 17px;
+  font-weight: 500;
+  letter-spacing: 0.01em;
+  margin: 0 0 6px;
+}
+
+.category-list {
+  list-style: none;
+  padding: 0;
+  margin: 24px 0 0;
+  display: grid;
+  gap: 28px;
+}
+
+.category-list li {
+  border-left: 1px solid var(--color-divider);
+  padding-left: 20px;
+  margin: 0;
+}
+
+.category-list p {
+  margin: 0;
+}
+
+.showroom {
+  border: 1px solid var(--color-divider);
+  padding: 32px;
+  margin-top: 28px;
+}
+
+.showroom address {
+  font-style: normal;
+  line-height: 1.8;
+  color: var(--color-neutral-700);
+}
+
+.hours {
+  margin: 24px 0;
+  padding: 20px 0;
+  border-top: 1px solid var(--color-divider);
+  border-bottom: 1px solid var(--color-divider);
+  display: grid;
+  gap: 8px;
+  font-size: 14px;
+  color: var(--color-neutral-700);
+}
+
+.hours > div {
+  display: flex;
+  justify-content: space-between;
+  gap: 24px;
+}
+
+.hours dt {
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  font-size: 12px;
+  color: var(--color-neutral-500);
+  align-self: center;
+}
+
+.hours dd {
+  margin: 0;
+  font-feature-settings: "tnum";
+}
+
+.showroom-contact {
+  margin: 0 0 24px;
+  font-feature-settings: "tnum";
+  letter-spacing: 0.06em;
+}
+
+/* The home page's .btn is sized for a centred flex row; here it has to opt
+   into being an inline block of its own. */
+.showroom .btn {
+  display: inline-flex;
+}
+
+@media (max-width: 480px) {
+  .showroom {
+    padding: 24px 20px;
+  }
+
+  .hours > div {
+    flex-direction: column;
+    gap: 2px;
+  }
 }

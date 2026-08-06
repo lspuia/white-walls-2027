@@ -134,9 +134,17 @@ export default function UnderConstructionPage() {
                 <a href={`tel:${PHONES[1].dial}`}>{PHONES[1].display}</a>
               </div>
               <span>Tuikual South · Aizawl, Mizoram</span>
-              <Link className="privacy" href="/privacy-policy">
-                Privacy Policy
-              </Link>
+              {/* /products is otherwise reachable only from the sitemap. A page
+                  no page links to is a page Google treats as an afterthought,
+                  so the holding page carries the one link into it. */}
+              <div className="contact-links">
+                <Link className="privacy" href="/products">
+                  Products
+                </Link>
+                <Link className="privacy" href="/privacy-policy">
+                  Privacy Policy
+                </Link>
+              </div>
             </div>
           </div>
         </div>
