@@ -1,6 +1,19 @@
 import Image from "next/image";
 import Link from "next/link";
+import type { Metadata } from "next";
 import DustCanvas from "./_components/DustCanvas";
+import { PHONES, SOCIAL_PROFILES } from "./_lib/site";
+import { buildStructuredData, serializeJsonLd } from "./_lib/structured-data";
+
+export const metadata: Metadata = {
+  // `absolute` opts out of the layout's "%s | White Walls…" template, which
+  // would otherwise duplicate the studio name already in this title.
+  title: {
+    absolute:
+      "White Walls Interior Design Studio — Aizawl, Mizoram | Website Under Construction",
+  },
+  alternates: { canonical: "/" },
+};
 
 const MARQUEE_TEXT =
   "Website under construction · The studio remains open · Aizawl · Website under construction · The studio remains open · Aizawl · ";
@@ -45,73 +58,89 @@ function FacebookIcon() {
 
 export default function UnderConstructionPage() {
   return (
-    <div className="page">
-      <DustCanvas />
-      <div className="frame-outer" />
-      <div className="frame-inner" />
+    <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: serializeJsonLd(buildStructuredData()),
+        }}
+      />
 
-      <div className="marquee-strip">
-        <div className="marquee" aria-hidden="true">
-          <span>{MARQUEE_TEXT}</span>
-          <span>{MARQUEE_TEXT}</span>
-        </div>
-      </div>
+      <main className="page">
+        <DustCanvas />
+        <div className="frame-outer" />
+        <div className="frame-inner" />
 
-      <div className="center">
-        <div className="stack">
-          <Image
-            className="logo"
-            src="/images/logo.png"
-            alt="White Walls — Interior Design Studio"
-            width={807}
-            height={428}
-            priority
-          />
-
-          <div className="gold-rule" />
-
-          <div className="kicker">A notice to our visitors</div>
-
-          <p className="body-copy">
-            While we redesign whitewalls.in, the studio remains open — drawing,
-            drafting, and building beautiful interiors across Mizoram. Follow
-            along as the new site takes shape.
-          </p>
-
-          <div className="socials">
-            <a
-              className="btn"
-              href="https://www.instagram.com/whitewallsaizawl/"
-              target="_blank"
-              rel="noopener"
-            >
-              <InstagramIcon />
-              Instagram
-            </a>
-            <a
-              className="btn"
-              href="https://www.facebook.com/WhiteWallsAizawl"
-              target="_blank"
-              rel="noopener"
-            >
-              <FacebookIcon />
-              Facebook
-            </a>
+        <div className="marquee-strip">
+          <div className="marquee" aria-hidden="true">
+            <span>{MARQUEE_TEXT}</span>
+            <span>{MARQUEE_TEXT}</span>
           </div>
+        </div>
 
-          <div className="contact">
-            <div className="contact-row">
-              <a href="tel:9654956742">9654 956 742</a>
-              <span className="dot">·</span>
-              <a href="tel:9862351441">9862 351 441</a>
+        <div className="center">
+          <div className="stack">
+            {/* The wordmark carries the brand visually, but a logo is an image
+                — crawlers and screen readers need a real heading, so the page's
+                one h1 is here and hidden rather than absent. */}
+            <h1 className="visually-hidden">
+              White Walls Interior Design Studio — Aizawl, Mizoram
+            </h1>
+
+            <Image
+              className="logo"
+              src="/images/logo.png"
+              alt="White Walls — Interior Design Studio"
+              width={807}
+              height={428}
+              priority
+            />
+
+            <div className="gold-rule" />
+
+            <div className="kicker">A notice to our visitors</div>
+
+            <p className="body-copy">
+              While we redesign whitewalls.in, the studio remains open — drawing,
+              drafting, and building beautiful interiors across Mizoram. Follow
+              along as the new site takes shape.
+            </p>
+
+            <div className="socials">
+              <a
+                className="btn"
+                href={SOCIAL_PROFILES.instagram}
+                target="_blank"
+                rel="noopener"
+              >
+                <InstagramIcon />
+                Instagram
+              </a>
+              <a
+                className="btn"
+                href={SOCIAL_PROFILES.facebook}
+                target="_blank"
+                rel="noopener"
+              >
+                <FacebookIcon />
+                Facebook
+              </a>
             </div>
-            <span>Tuikual South · Aizawl, Mizoram</span>
-            <Link className="privacy" href="/privacy-policy">
-              Privacy Policy
-            </Link>
+
+            <div className="contact">
+              <div className="contact-row">
+                <a href={`tel:${PHONES[0].dial}`}>{PHONES[0].display}</a>
+                <span className="dot">·</span>
+                <a href={`tel:${PHONES[1].dial}`}>{PHONES[1].display}</a>
+              </div>
+              <span>Tuikual South · Aizawl, Mizoram</span>
+              <Link className="privacy" href="/privacy-policy">
+                Privacy Policy
+              </Link>
+            </div>
           </div>
         </div>
-      </div>
-    </div>
+      </main>
+    </>
   );
 }

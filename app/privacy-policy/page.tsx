@@ -2,8 +2,11 @@ import type { Metadata } from "next";
 import Link from "next/link";
 
 export const metadata: Metadata = {
-  title: "Privacy Policy | White Walls Interior Design",
-  description: "Privacy Policy for White Walls Interior Design, Aizawl, Mizoram.",
+  // The layout's title template appends the studio name.
+  title: "Privacy Policy",
+  description:
+    "How White Walls Interior Design Studio, Aizawl, collects, uses and protects the information you share with us.",
+  alternates: { canonical: "/privacy-policy" },
 };
 
 export default function PrivacyPolicyPage() {
@@ -116,7 +119,6 @@ export default function PrivacyPolicyPage() {
       </p>
       <address>
         <strong>White Walls</strong><br />
-        Gr. Floor, Solomon&apos;s Cave,<br />
         Tuikual South, Aizawl,<br />
         Mizoram &mdash; India<br />
         <br />

@@ -79,6 +79,20 @@ img {
   }
 }
 
+/* Off-canvas rather than display:none — the h1 has to stay in the accessibility
+   tree and in the rendered text for crawlers, it just must not be seen. */
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  border: 0;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
 /* ── Page shell ────────────────────────────────────────────────────────── */
 .page {
   position: relative;
