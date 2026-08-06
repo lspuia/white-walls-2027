@@ -46,10 +46,18 @@ export const PHONES = [
   { display: "9862 351 441", dial: "9862351441" },
 ] as const;
 
-/** Business Profile hours. 24-hour times, as schema.org requires. */
+/**
+ * Opening hours. 24-hour times, as schema.org requires.
+ *
+ * Saturday closes at 17:00, corrected by the studio in August 2026. The Google
+ * Business Profile still says 19:00 — everything else here is transcribed from
+ * that Profile, so this one line is deliberately ahead of it and the Profile
+ * needs the same edit. Hours that disagree between the two are exactly what
+ * Google's "suggest an edit" prompts are built to surface.
+ */
 export const OPENING_HOURS = [
   { days: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"], opens: "09:30", closes: "18:00" },
-  { days: ["Saturday"], opens: "09:30", closes: "19:00" },
+  { days: ["Saturday"], opens: "09:30", closes: "17:00" },
   { days: ["Sunday"], opens: "00:00", closes: "00:00" },
 ] as const;
 
