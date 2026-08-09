@@ -2,23 +2,33 @@ import type { NextConfig } from "next";
 
 /**
  * Routes from the old site, removed when it was replaced by the holding page.
- * These are expected back after the redesign, so the redirects are temporary
- * (307) — a permanent 308 would be cached by browsers indefinitely and keep
- * visitors off the real pages once they return.
+ *
+ * Two of them still point at `/` and stay temporary (307): the pages they name
+ * are expected back after the redesign, and a permanent 308 would be cached by
+ * browsers indefinitely and keep visitors off the real pages once they return.
+ *
+ * The old shop URL is the exception. /products is its successor and is already
+ * live at the path the catalogue will keep, so that redirect is permanent —
+ * which is what tells Google to fold the old URL's history and inbound links
+ * into the new page rather than treat it as a page that has merely stepped out.
  */
 const RETIRED_ROUTES = [
-  "/contact-us",
-  "/interior-design-service-aizawl-mizoram",
-  "/shop-interior-hardware-accessories",
+  { source: "/contact-us", destination: "/", permanent: false },
+  {
+    source: "/interior-design-service-aizawl-mizoram",
+    destination: "/",
+    permanent: false,
+  },
+  {
+    source: "/shop-interior-hardware-accessories",
+    destination: "/products",
+    permanent: true,
+  },
 ];
 
 const nextConfig: NextConfig = {
   async redirects() {
-    return RETIRED_ROUTES.map((source) => ({
-      source,
-      destination: "/",
-      permanent: false,
-    }));
+    return RETIRED_ROUTES;
   },
 };
 
