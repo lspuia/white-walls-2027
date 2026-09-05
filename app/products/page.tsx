@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import { OFFER_PATH } from "../_lib/hafele-shagun-2026";
 import {
   ADDRESS,
   MAPS_URL,
@@ -129,6 +130,20 @@ export default function ProductsPage() {
           here is what the catalogue will cover — and how to see any of it in
           person in the meantime.
         </p>
+
+        <h2>On offer now</h2>
+        <div className="offer">
+          <h3>Häfele Shagun Offer 2026</h3>
+          <p>
+            Häfele&apos;s built-in kitchen appliances — hoods, hobs, ovens,
+            microwaves and dishwashers — at festive prices, supplied and
+            installed in Aizawl. Ten combo sets add a fifth appliance for ₹11,
+            and every piece in the range is listed with its MRP and offer price.
+          </p>
+          <Link className="btn" href={OFFER_PATH}>
+            See the Häfele offer
+          </Link>
+        </div>
 
         <h2>What the catalogue will cover</h2>
         <ul className="category-list">

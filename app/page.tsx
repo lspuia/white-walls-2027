@@ -2,6 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import type { Metadata } from "next";
 import DustCanvas from "./_components/DustCanvas";
+import { OFFER_PATH } from "./_lib/hafele-shagun-2026";
 import { PHONES, SOCIAL_PROFILES } from "./_lib/site";
 import { buildStructuredData, serializeJsonLd } from "./_lib/structured-data";
 
@@ -134,10 +135,14 @@ export default function UnderConstructionPage() {
                 <a href={`tel:${PHONES[1].dial}`}>{PHONES[1].display}</a>
               </div>
               <span>Tuikual South · Aizawl, Mizoram</span>
-              {/* /products is otherwise reachable only from the sitemap. A page
-                  no page links to is a page Google treats as an afterthought,
-                  so the holding page carries the one link into it. */}
+              {/* /products and the Häfele offer are otherwise reachable only
+                  from the sitemap. A page no page links to is a page Google
+                  treats as an afterthought, so the holding page carries the
+                  links into them. */}
               <div className="contact-links">
+                <Link className="privacy" href={OFFER_PATH}>
+                  Häfele Shagun Offer 2026
+                </Link>
                 <Link className="privacy" href="/products">
                   Products
                 </Link>

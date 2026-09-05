@@ -430,10 +430,27 @@ img {
   margin: 0;
 }
 
+/* The offer panel and the showroom box share one frame, so the two boxed
+   things on the page read as the same kind of thing. */
+.offer,
 .showroom {
   border: 1px solid var(--color-divider);
   padding: 32px;
   margin-top: 28px;
+}
+
+.offer {
+  margin-top: 0;
+  border-left: 2px solid var(--color-accent);
+}
+
+.offer p {
+  margin: 0 0 24px;
+}
+
+.offer .btn,
+.showroom .btn {
+  display: inline-flex;
 }
 
 .showroom address {
@@ -478,13 +495,8 @@ img {
   letter-spacing: 0.06em;
 }
 
-/* The home page's .btn is sized for a centred flex row; here it has to opt
-   into being an inline block of its own. */
-.showroom .btn {
-  display: inline-flex;
-}
-
 @media (max-width: 480px) {
+  .offer,
   .showroom {
     padding: 24px 20px;
   }
