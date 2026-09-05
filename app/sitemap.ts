@@ -24,6 +24,14 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: 0.8,
     },
     {
+      // The first brand page beneath /products: a campaign landing page, so
+      // its prices change with the offer rather than with the site.
+      url: `${SITE_URL}/products/hafele/shagun-offer-2026`,
+      lastModified: new Date(),
+      changeFrequency: "weekly",
+      priority: 0.7,
+    },
+    {
       url: `${SITE_URL}/privacy-policy`,
       lastModified: new Date(),
       changeFrequency: "yearly",

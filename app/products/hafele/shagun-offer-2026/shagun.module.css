@@ -1,0 +1,798 @@
+/*
+ * Häfele Shagun Offer 2026 — styles carried over from the designed handoff
+ * (handoff/hafele-shagun-offer.html) and scoped under .page so they neither
+ * leak into the rest of the site nor pick up its Lora/gold "Classical" sheet.
+ *
+ * The handoff styled bare elements (header, nav, section, footer). CSS Modules
+ * need a local class in every selector, so those rules hang off .page here.
+ */
+
+.page {
+  --ink: #1a1714;
+  --paper: #ffffff;
+  --stone: #f3f1ec;
+  --line: #e3dfd6;
+  --mute: #6e6860;
+  --champagne: #c8b89a;
+  --red: #d20037;
+  --red-deep: #a8002c;
+  --wa: #25d366;
+  --w: 1240px;
+
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--font-jost), system-ui, sans-serif;
+  font-weight: 400;
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+}
+
+.page *,
+.page *::before,
+.page *::after {
+  box-sizing: border-box;
+}
+
+.page img {
+  display: block;
+  max-width: 100%;
+}
+
+/* :where() keeps this at class specificity, so .btnWa, .nav a and .wa can
+   still set their own colours while the site-wide gold link colour is undone. */
+.page :where(a) {
+  color: inherit;
+}
+
+.page h1,
+.page h2,
+.page h3 {
+  margin: 0;
+  font-weight: 500;
+}
+
+.serif {
+  font-family: var(--font-cormorant), Georgia, serif;
+}
+
+.wrap {
+  max-width: var(--w);
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+/* ── Header ────────────────────────────────────────────────────────────── */
+.header {
+  border-bottom: 1px solid var(--line);
+  background: var(--paper);
+  position: sticky;
+  top: 0;
+  z-index: 20;
+}
+
+/* Sized by the White Walls logo rather than a fixed height: the logo is the
+   header's main element on this co-branded page. */
+.bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  padding: 12px 24px;
+}
+
+.brands {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.ww img {
+  height: 104px;
+  width: auto;
+}
+
+.sep {
+  width: 1px;
+  height: 56px;
+  background: var(--line);
+}
+
+.hf img {
+  height: 30px;
+  width: auto;
+}
+
+.nav {
+  display: flex;
+  gap: 28px;
+  font-size: 15px;
+}
+
+.nav a {
+  text-decoration: none;
+  color: var(--mute);
+}
+
+.nav a:hover {
+  color: var(--ink);
+}
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 12px 20px;
+  border-radius: 999px;
+  text-decoration: none;
+  font-weight: 500;
+  font-size: 15px;
+  border: 1px solid transparent;
+  white-space: nowrap;
+}
+
+.btnWa {
+  background: var(--ink);
+  color: #fff;
+}
+
+.btnWa:hover {
+  background: #000;
+}
+
+.btnWa svg {
+  width: 18px;
+  height: 18px;
+  fill: var(--wa);
+}
+
+.btnLine {
+  border-color: var(--ink);
+  color: var(--ink);
+}
+
+.btnLine:hover {
+  background: var(--stone);
+}
+
+.btn:focus-visible,
+.filters button:focus-visible {
+  outline: 2px solid var(--red);
+  outline-offset: 2px;
+}
+
+/* ── Hero ──────────────────────────────────────────────────────────────── */
+.hero {
+  background: var(--stone);
+  border-bottom: 1px solid var(--line);
+}
+
+.hero .wrap {
+  display: grid;
+  grid-template-columns: 1.1fr 0.9fr;
+  gap: 48px;
+  align-items: center;
+  padding-top: 72px;
+  padding-bottom: 72px;
+}
+
+.hero h1 {
+  font-size: clamp(44px, 6vw, 84px);
+  line-height: 1;
+  font-weight: 500;
+  letter-spacing: -0.01em;
+}
+
+.hero h1 em {
+  font-style: italic;
+  color: var(--red);
+  font-weight: 500;
+}
+
+.lead {
+  font-size: 19px;
+  max-width: 52ch;
+  margin: 24px 0 0;
+  color: #3d3833;
+}
+
+.cta {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin-top: 32px;
+}
+
+.heroVisual {
+  position: relative;
+  aspect-ratio: 1 / 1;
+  background: var(--paper);
+  border-radius: 8px;
+  overflow: hidden;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 1fr 1fr;
+  gap: 2px;
+  border: 1px solid var(--line);
+}
+
+.heroTile {
+  position: relative;
+  background: #fff;
+}
+
+.heroTile .picInner {
+  inset: 18px;
+}
+
+.tag {
+  position: absolute;
+  left: 16px;
+  bottom: 16px;
+  background: var(--red);
+  color: #fff;
+  padding: 8px 14px;
+  border-radius: 999px;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.facts {
+  display: flex;
+  gap: 40px;
+  margin-top: 40px;
+  padding-top: 24px;
+  border-top: 1px solid var(--line);
+  font-size: 15px;
+  color: var(--mute);
+}
+
+.facts b {
+  display: block;
+  color: var(--ink);
+  font-size: 24px;
+  font-weight: 500;
+  line-height: 1.1;
+}
+
+/* ── Sections ──────────────────────────────────────────────────────────── */
+.section {
+  padding: 72px 0;
+}
+
+.secHead {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 24px;
+  margin-bottom: 32px;
+  flex-wrap: wrap;
+}
+
+.secHead h2 {
+  font-size: 34px;
+  line-height: 1.1;
+}
+
+.secHead p {
+  margin: 8px 0 0;
+  color: var(--mute);
+  max-width: 62ch;
+}
+
+.champ {
+  height: 4px;
+  background: var(--champagne);
+  width: 96px;
+  margin-bottom: 28px;
+}
+
+/* ── Product pictures (shared by combos, cards and the hero) ───────────── */
+/* next/image's `fill` ignores the box's padding, so the padding is an inset
+   on an inner positioned box and the picture fills that. */
+.pic {
+  position: relative;
+  aspect-ratio: 1 / 1;
+  background: var(--stone);
+  border-radius: 6px;
+  overflow: hidden;
+}
+
+.picInner {
+  position: absolute;
+  inset: 12px;
+}
+
+.picImg {
+  object-fit: contain;
+  mix-blend-mode: multiply;
+}
+
+.ph {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 13px;
+  color: var(--mute);
+  text-align: center;
+  line-height: 1.4;
+}
+
+/* ── Combos ────────────────────────────────────────────────────────────── */
+.combo {
+  display: grid;
+  grid-template-columns: 1fr 300px;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  overflow: hidden;
+  margin-bottom: 20px;
+  background: #fff;
+}
+
+.comboItems {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  border-right: 1px solid var(--line);
+}
+
+.item {
+  padding: 20px 16px 18px;
+  border-right: 1px solid var(--line);
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  min-width: 0;
+}
+
+.item:last-child {
+  border-right: 0;
+}
+
+.nm {
+  font-size: 15px;
+  font-weight: 500;
+  line-height: 1.3;
+}
+
+.cat {
+  font-size: 13px;
+  color: var(--mute);
+}
+
+.mrp {
+  font-size: 13px;
+  color: var(--mute);
+}
+
+.bonus {
+  background: #fff3f5;
+}
+
+.bonus .pic {
+  background: #fff;
+  border: 1px dashed var(--red);
+}
+
+.badge {
+  align-self: flex-start;
+  display: inline-block;
+  background: var(--red);
+  color: #fff;
+  font-size: 12px;
+  font-weight: 500;
+  padding: 4px 10px;
+  border-radius: 999px;
+}
+
+.bonus .nm {
+  margin-top: 8px;
+}
+
+.comboPrice {
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  background: var(--paper);
+}
+
+.n {
+  font-size: 13px;
+  color: var(--mute);
+}
+
+.t {
+  font-size: 20px;
+  font-weight: 500;
+  line-height: 1.25;
+  margin-top: 4px;
+}
+
+.price {
+  margin-top: 18px;
+}
+
+.price .was {
+  color: var(--mute);
+  text-decoration: line-through;
+  font-size: 15px;
+}
+
+.price .now {
+  font-size: 34px;
+  font-weight: 500;
+  line-height: 1.1;
+  letter-spacing: -0.01em;
+}
+
+.price .now small {
+  font-size: 15px;
+  color: var(--mute);
+  font-weight: 400;
+  margin-left: 6px;
+}
+
+.save {
+  display: inline-block;
+  margin-top: 10px;
+  color: var(--red);
+  font-weight: 500;
+  font-size: 15px;
+}
+
+.comboPrice .btn {
+  margin-top: 18px;
+  justify-content: center;
+}
+
+/* ── Individual appliances ─────────────────────────────────────────────── */
+.filters {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin-bottom: 28px;
+}
+
+.filters button {
+  font: inherit;
+  font-size: 14px;
+  padding: 8px 16px;
+  border-radius: 999px;
+  border: 1px solid var(--line);
+  background: #fff;
+  color: var(--ink);
+  cursor: pointer;
+}
+
+.filters button[aria-pressed="true"] {
+  background: var(--ink);
+  color: #fff;
+  border-color: var(--ink);
+}
+
+.count {
+  font-size: 14px;
+  color: var(--mute);
+  margin-bottom: 12px;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
+}
+
+.card {
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  background: #fff;
+}
+
+.card .pic {
+  border-radius: 0;
+}
+
+.card .picInner {
+  inset: 22px;
+}
+
+.off {
+  position: absolute;
+  top: 12px;
+  left: 12px;
+  z-index: 1;
+  background: var(--red);
+  color: #fff;
+  font-size: 13px;
+  font-weight: 500;
+  padding: 4px 10px;
+  border-radius: 999px;
+}
+
+.body {
+  padding: 16px 18px 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  flex: 1;
+}
+
+.series {
+  font-size: 12px;
+  color: var(--mute);
+}
+
+.card h3 {
+  font-size: 17px;
+  line-height: 1.3;
+  font-weight: 500;
+}
+
+.spec {
+  font-size: 13.5px;
+  color: #4a4540;
+  line-height: 1.45;
+}
+
+.code {
+  font-size: 12px;
+  color: var(--mute);
+  margin-top: auto;
+  padding-top: 10px;
+}
+
+.p {
+  display: flex;
+  align-items: baseline;
+  gap: 10px;
+  margin-top: 6px;
+  flex-wrap: wrap;
+}
+
+.p .now {
+  font-size: 22px;
+  font-weight: 500;
+}
+
+.p .was {
+  font-size: 14px;
+  color: var(--mute);
+  text-decoration: line-through;
+}
+
+.wa {
+  margin-top: 12px;
+  font-size: 14px;
+  text-decoration: none;
+  color: var(--ink);
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.wa svg {
+  width: 16px;
+  height: 16px;
+  fill: var(--wa);
+}
+
+.wa:hover {
+  text-decoration: underline;
+}
+
+/* ── Why buy here ──────────────────────────────────────────────────────── */
+.why {
+  background: var(--stone);
+  border-top: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+  padding: 72px 0;
+}
+
+.why .wrap {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 40px;
+}
+
+.why h3 {
+  font-size: 20px;
+  margin-bottom: 8px;
+}
+
+.why p {
+  margin: 0;
+  color: #3d3833;
+  max-width: 44ch;
+}
+
+/* ── Footer ────────────────────────────────────────────────────────────── */
+.footer {
+  padding: 56px 0 40px;
+  font-size: 14px;
+  color: var(--mute);
+}
+
+.footerCols {
+  display: grid;
+  grid-template-columns: 1.2fr 1fr 1fr;
+  gap: 40px;
+}
+
+.footer h4 {
+  margin: 0 0 10px;
+  color: var(--ink);
+  font-weight: 500;
+  font-size: 15px;
+}
+
+.footer p {
+  margin: 0 0 6px;
+}
+
+.footer a {
+  text-decoration: none;
+}
+
+.footer a:hover {
+  text-decoration: underline;
+}
+
+.terms {
+  margin-top: 40px;
+  padding-top: 20px;
+  border-top: 1px solid var(--line);
+  font-size: 13px;
+  line-height: 1.55;
+  max-width: 90ch;
+}
+
+.terms strong {
+  color: var(--ink);
+}
+
+/* ── Sticky mobile CTA ─────────────────────────────────────────────────── */
+.mobCta {
+  display: none;
+}
+
+/* ── Responsive ────────────────────────────────────────────────────────── */
+@media (max-width: 1024px) {
+  .combo {
+    grid-template-columns: 1fr;
+  }
+
+  .comboItems {
+    border-right: 0;
+    border-bottom: 1px solid var(--line);
+  }
+
+  .grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .footerCols,
+  .why .wrap {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+@media (max-width: 760px) {
+  .page {
+    padding-bottom: 80px;
+  }
+
+  .bar {
+    padding: 10px 24px;
+    gap: 16px;
+  }
+
+  .nav,
+  .bar .btn {
+    display: none;
+  }
+
+  .ww img {
+    height: 76px;
+  }
+
+  .sep {
+    height: 40px;
+  }
+
+  .hf img {
+    height: 22px;
+  }
+
+  .hero .wrap {
+    grid-template-columns: 1fr;
+    padding-top: 48px;
+    padding-bottom: 48px;
+    gap: 32px;
+  }
+
+  .heroVisual {
+    order: -1;
+    max-width: 420px;
+  }
+
+  .facts {
+    gap: 24px;
+    flex-wrap: wrap;
+  }
+
+  .section,
+  .why {
+    padding: 48px 0;
+  }
+
+  .comboItems {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .item {
+    border-bottom: 1px solid var(--line);
+  }
+
+  .item:nth-child(2n) {
+    border-right: 0;
+  }
+
+  .bonus {
+    grid-column: 1 / -1;
+    flex-direction: row;
+    align-items: center;
+  }
+
+  .bonus .pic {
+    width: 96px;
+    flex: 0 0 96px;
+  }
+
+  .grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+  }
+
+  .body {
+    padding: 12px 14px 14px;
+  }
+
+  .card h3 {
+    font-size: 15px;
+  }
+
+  .spec {
+    display: none;
+  }
+
+  .footerCols,
+  .why .wrap {
+    grid-template-columns: 1fr;
+  }
+
+  .mobCta {
+    display: flex;
+    position: fixed;
+    left: 16px;
+    right: 16px;
+    bottom: 16px;
+    z-index: 30;
+    justify-content: center;
+    box-shadow: 0 10px 30px rgba(26, 23, 20, 0.25);
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .card .picImg,
+  .item .picImg {
+    transition: transform 0.35s ease;
+  }
+
+  .card:hover .picImg {
+    transform: scale(1.04);
+  }
+}

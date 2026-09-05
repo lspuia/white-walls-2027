@@ -142,6 +142,58 @@ export function buildProductsStructuredData() {
 }
 
 /**
+ * The Häfele Shagun Offer page, described as a page under /products.
+ *
+ * Still no `Product` or `Offer` markup, on the same reasoning as /products:
+ * the offer is "for a limited period" with no stated end date and no stock
+ * levels, so per-product offer markup could not carry the `priceValidUntil`
+ * and `availability` Google's merchant guidelines expect, and markup that is
+ * thinner than the page is a warning rather than a win. The breadcrumb is the
+ * part that pays: it slots the page under Products in the result snippet.
+ */
+export function buildShagunOfferStructuredData() {
+  const productsUrl = `${SITE_URL}/products`;
+  const pageUrl = `${SITE_URL}/products/hafele/shagun-offer-2026`;
+
+  return {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "WebPage",
+        "@id": `${pageUrl}#page`,
+        url: pageUrl,
+        name: "Häfele Shagun Offer 2026 — Built-in Kitchen Appliances",
+        description:
+          "Häfele built-in kitchen appliances at Shagun offer prices from White Walls, Aizawl. Combo sets and individual hoods, hobs, ovens, dishwashers and more.",
+        inLanguage: "en-IN",
+        isPartOf: { "@id": WEBSITE_ID },
+        about: { "@id": BUSINESS_ID },
+        publisher: { "@id": BUSINESS_ID },
+      },
+      {
+        "@type": "BreadcrumbList",
+        "@id": `${pageUrl}#breadcrumb`,
+        itemListElement: [
+          { "@type": "ListItem", position: 1, name: "Home", item: SITE_URL },
+          {
+            "@type": "ListItem",
+            position: 2,
+            name: "Products",
+            item: productsUrl,
+          },
+          {
+            "@type": "ListItem",
+            position: 3,
+            name: "Häfele Shagun Offer 2026",
+            item: pageUrl,
+          },
+        ],
+      },
+    ],
+  };
+}
+
+/**
  * `JSON.stringify` does not escape `<`, so a stray HTML tag in any of the
  * values above could break out of the script element. None of them are
  * user-supplied today, but escaping keeps that true if they ever become so.
