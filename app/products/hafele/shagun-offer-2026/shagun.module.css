@@ -254,9 +254,17 @@
   line-height: 1.1;
 }
 
+/* ── Jump bar — mobile only, see the 760px block below ──────────────────── */
+.jump {
+  display: none;
+}
+
 /* ── Sections ──────────────────────────────────────────────────────────── */
+/* Anchored sections have to clear whichever bar is sticking, or the heading
+   they scroll to lands underneath it. */
 .section {
   padding: 72px 0;
+  scroll-margin-top: 140px;
 }
 
 .secHead {
@@ -685,9 +693,57 @@
     padding-bottom: 80px;
   }
 
+  /* The jump bar takes over the sticking here — see .jump below. */
+  .header {
+    position: static;
+  }
+
   .bar {
     padding: 10px 24px;
     gap: 16px;
+  }
+
+  .jump {
+    display: flex;
+    gap: 8px;
+    position: sticky;
+    top: 0;
+    z-index: 21;
+    background: var(--paper);
+    border-bottom: 1px solid var(--line);
+    padding: 10px 16px;
+    /* More chips than fit stay reachable by swiping the row. */
+    overflow-x: auto;
+    scrollbar-width: none;
+  }
+
+  .jump::-webkit-scrollbar {
+    display: none;
+  }
+
+  .jump a {
+    flex: none;
+    white-space: nowrap;
+    text-decoration: none;
+    font-size: 13px;
+    line-height: 1;
+    color: var(--ink);
+    border: 1px solid var(--line);
+    border-radius: 999px;
+    padding: 9px 15px;
+  }
+
+  /* The one the bar exists for: the grid is the far side of ten combo sets.
+     Scoped under .jump so it outranks the `.jump a` colour above. */
+  .jump .jumpPrimary {
+    background: var(--ink);
+    color: #fff;
+    border-color: var(--ink);
+  }
+
+  .section,
+  .terms {
+    scroll-margin-top: 58px;
   }
 
   .nav,

@@ -222,6 +222,19 @@ export default function ShagunOfferPage() {
           </div>
         </header>
 
+        {/* Mobile only. The desktop nav is hidden at this width, and the ten
+            combo sets sit between the top of the page and the appliance grid,
+            so the sections need reaching without scrolling past them. This bar
+            sticks instead of the header — a sticky header carrying the full
+            logo would hold on to a sixth of a phone screen. */}
+        <nav className={s.jump} aria-label="Jump to a section">
+          <a href="#combos">Combo sets</a>
+          <a className={s.jumpPrimary} href="#appliances">
+            All {APPLIANCES.length} appliances
+          </a>
+          <a href="#terms">Offer terms</a>
+        </nav>
+
         <main>
           <div className={s.hero}>
             <div className={s.wrap}>

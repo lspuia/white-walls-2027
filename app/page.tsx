@@ -2,7 +2,12 @@ import Image from "next/image";
 import Link from "next/link";
 import type { Metadata } from "next";
 import DustCanvas from "./_components/DustCanvas";
-import { OFFER_PATH } from "./_lib/hafele-shagun-2026";
+import {
+  COMBOS,
+  IMAGE_DIR,
+  MAX_PERCENT_OFF,
+  OFFER_PATH,
+} from "./_lib/hafele-shagun-2026";
 import { PHONES, SOCIAL_PROFILES } from "./_lib/site";
 import { buildStructuredData, serializeJsonLd } from "./_lib/structured-data";
 
@@ -57,6 +62,35 @@ function FacebookIcon() {
   );
 }
 
+/**
+ * One pass of the offer ticker. Rendered twice inside the marquee, because the
+ * -50% scroll only loops seamlessly when the strip holds exactly two identical
+ * copies of its content.
+ */
+function OfferTicker() {
+  return (
+    <div className="offer-ticker">
+      <span className="offer-ticker-lead">Häfele Shagun Offer 2026</span>
+      <Image
+        className="offer-ticker-logo"
+        src={`${IMAGE_DIR}/hafele-logo.webp`}
+        alt=""
+        width={400}
+        height={63}
+      />
+      <span className="offer-ticker-dot">·</span>
+      <span className="offer-ticker-flag">Fifth appliance for ₹11</span>
+      <span className="offer-ticker-dot">·</span>
+      <span>Up to {MAX_PERCENT_OFF}% off MRP</span>
+      <span className="offer-ticker-dot">·</span>
+      <span>{COMBOS.length} combo sets</span>
+      <span className="offer-ticker-dot">·</span>
+      <span className="offer-ticker-cta">See the offer</span>
+      <span className="offer-ticker-dot">·</span>
+    </div>
+  );
+}
+
 export default function UnderConstructionPage() {
   return (
     <>
@@ -78,6 +112,20 @@ export default function UnderConstructionPage() {
             <span>{MARQUEE_TEXT}</span>
           </div>
         </div>
+
+        {/* The whole band is the link into the offer. Its scrolling contents
+            are hidden from assistive tech — they repeat, and the aria-label
+            says the same thing once. */}
+        <Link
+          className="offer-strip"
+          href={OFFER_PATH}
+          aria-label={`Häfele Shagun Offer 2026 — up to ${MAX_PERCENT_OFF}% off MRP and a fifth appliance for ₹11. See the offer.`}
+        >
+          <div className="offer-marquee" aria-hidden="true">
+            <OfferTicker />
+            <OfferTicker />
+          </div>
+        </Link>
 
         <div className="center">
           <div className="stack">

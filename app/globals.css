@@ -13,6 +13,9 @@
   --font-body: var(--font-lora), Georgia, serif;
 
   --marquee-h: 64px;
+  --offer-h: 46px;
+  /* Everything under the two top strips is inset by their combined height. */
+  --strips-h: calc(var(--marquee-h) + var(--offer-h));
 }
 
 *,
@@ -98,13 +101,13 @@ img {
   position: relative;
   min-height: 100vh;
   display: grid;
-  grid-template-rows: var(--marquee-h) 1fr;
+  grid-template-rows: var(--marquee-h) var(--offer-h) 1fr;
   overflow: hidden;
 }
 
 .dust {
   position: absolute;
-  inset: var(--marquee-h) 0 0 0;
+  inset: var(--strips-h) 0 0 0;
   pointer-events: none;
 }
 
@@ -115,13 +118,13 @@ img {
   pointer-events: none;
 }
 
-/* Top inset clears the marquee strip; the other three sides are the plain inset. */
+/* Top inset clears both top strips; the other three sides are the plain inset. */
 .frame-outer {
-  inset: calc(36px + var(--marquee-h)) 36px 36px 36px;
+  inset: calc(36px + var(--strips-h)) 36px 36px 36px;
 }
 
 .frame-inner {
-  inset: calc(42px + var(--marquee-h)) 42px 42px 42px;
+  inset: calc(42px + var(--strips-h)) 42px 42px 42px;
 }
 
 .center {
@@ -282,19 +285,108 @@ img {
   font-feature-settings: "tnum";
 }
 
+/* ── Häfele offer strip — the second scrolling band ─────────────────────── */
+
+/* A promotion, so it has to read as one: white against the page's warm grey,
+   with the offer page's red on the one fact that sells it. The whole strip is
+   the link, which is why it also carries the hover state. */
+.offer-strip {
+  grid-row: 2;
+  position: relative;
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+  background: #fff;
+  border-bottom: 1px solid var(--color-divider);
+  text-decoration: none;
+}
+
+.offer-marquee {
+  display: flex;
+  white-space: nowrap;
+  animation: marquee 44s linear infinite;
+  will-change: transform;
+}
+
+/* No gap between the two copies: the -50% shift only lands cleanly when each
+   copy carries its own trailing space and the two are exactly equal width. */
+.offer-ticker {
+  display: flex;
+  align-items: center;
+  flex: none;
+  gap: 20px;
+  padding-right: 20px;
+  font-size: 11.5px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--color-neutral-700);
+  font-feature-settings: "tnum";
+}
+
+.offer-ticker-lead {
+  color: var(--color-text);
+}
+
+.offer-ticker-logo {
+  height: 14px;
+  width: auto;
+}
+
+.offer-ticker-flag {
+  background: #d20037;
+  color: #fff;
+  padding: 4px 12px;
+  border-radius: 999px;
+  letter-spacing: 0.14em;
+}
+
+.offer-ticker-cta {
+  color: var(--color-accent-700);
+}
+
+.offer-ticker-dot {
+  color: var(--color-accent);
+}
+
+/* Pause on hover so the link can be read and aimed at before it scrolls off. */
+.offer-strip:hover .offer-marquee {
+  animation-play-state: paused;
+}
+
+.offer-strip:hover .offer-ticker-cta {
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.offer-strip:focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: -3px;
+}
+
 /* ── Responsive ────────────────────────────────────────────────────────── */
 @media (max-width: 480px) {
   .frame-outer {
-    inset: calc(16px + var(--marquee-h)) 16px 16px 16px;
+    inset: calc(16px + var(--strips-h)) 16px 16px 16px;
   }
 
   .frame-inner {
-    inset: calc(22px + var(--marquee-h)) 22px 22px 22px;
+    inset: calc(22px + var(--strips-h)) 22px 22px 22px;
   }
 
   /* Frames tighten to 16px/22px here, so the copy can come in correspondingly. */
   .center {
     padding: 40px 38px;
+  }
+
+  .offer-ticker {
+    gap: 14px;
+    padding-right: 14px;
+    font-size: 10.5px;
+    letter-spacing: 0.16em;
+  }
+
+  .offer-ticker-flag {
+    padding: 3px 10px;
   }
 }
 
@@ -306,7 +398,8 @@ img {
   .socials,
   .contact,
   .gold-rule,
-  .marquee {
+  .marquee,
+  .offer-marquee {
     animation: none;
   }
 
