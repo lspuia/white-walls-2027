@@ -10,6 +10,7 @@ import {
   SITE_URL,
   SOCIAL_PROFILES,
 } from "./site";
+import { APPLIANCES, OFFER_PATH } from "./hafele-shagun-2026";
 
 /**
  * schema.org description of the studio, emitted as JSON-LD on the home page.
@@ -142,18 +143,28 @@ export function buildProductsStructuredData() {
 }
 
 /**
- * The Häfele Shagun Offer page, described as a page under /products.
+ * The Häfele Shagun Offer page: a page under /products, and the products on
+ * it.
  *
- * Still no `Product` or `Offer` markup, on the same reasoning as /products:
- * the offer is "for a limited period" with no stated end date and no stock
- * levels, so per-product offer markup could not carry the `priceValidUntil`
- * and `availability` Google's merchant guidelines expect, and markup that is
- * thinner than the page is a warning rather than a win. The breadcrumb is the
- * part that pays: it slots the page under Products in the result snippet.
+ * Unlike /products this page does carry `Product` and `Offer` markup, because
+ * here every claim is checkable against the page: each product's name, article
+ * number, picture, MRP and offer price is printed on its card, and each entry
+ * links to that card's anchor. What the page does not state stays out —
+ * there is no `priceValidUntil` (the offer says "for a limited period") and
+ * availability is `LimitedAvailability` ("while stocks last") rather than a
+ * stock claim we cannot back.
+ *
+ * Google does not show product rich results for a multi-product page, so the
+ * practical value is the `ItemList` telling it that this page lists these
+ * products at these prices, and the breadcrumb placing it under Products.
+ * Each entry is kept to the fields that carry that — name, article number,
+ * picture, price — because the list is emitted twice (once as the script,
+ * once inside the RSC payload) and 84 entries add up.
  */
 export function buildShagunOfferStructuredData() {
   const productsUrl = `${SITE_URL}/products`;
-  const pageUrl = `${SITE_URL}/products/hafele/shagun-offer-2026`;
+  const pageUrl = `${SITE_URL}${OFFER_PATH}`;
+  const listId = `${pageUrl}#appliances`;
 
   return {
     "@context": "https://schema.org",
@@ -162,13 +173,15 @@ export function buildShagunOfferStructuredData() {
         "@type": "WebPage",
         "@id": `${pageUrl}#page`,
         url: pageUrl,
-        name: "Häfele Shagun Offer 2026 — Built-in Kitchen Appliances",
+        name: "Häfele Shagun Offer 2026 — Built-in Kitchen Appliances in Aizawl",
         description:
-          "Häfele built-in kitchen appliances at Shagun offer prices from White Walls, Aizawl. Combo sets and individual hoods, hobs, ovens, dishwashers and more.",
+          "Häfele built-in kitchen appliances at Shagun offer prices from White Walls, Aizawl: combo sets with a fifth appliance for ₹11, and individual hoods, hobs, ovens, microwaves and dishwashers below MRP.",
         inLanguage: "en-IN",
+        image: `${pageUrl}/opengraph-image`,
         isPartOf: { "@id": WEBSITE_ID },
         about: { "@id": BUSINESS_ID },
         publisher: { "@id": BUSINESS_ID },
+        mainEntity: { "@id": listId },
       },
       {
         "@type": "BreadcrumbList",
@@ -188,6 +201,38 @@ export function buildShagunOfferStructuredData() {
             item: pageUrl,
           },
         ],
+      },
+      {
+        "@type": "ItemList",
+        "@id": listId,
+        name: "Häfele appliances in the Shagun Offer 2026",
+        numberOfItems: APPLIANCES.length,
+        itemListElement: APPLIANCES.map((appliance, index) => {
+          const url = `${pageUrl}#art-${appliance.code}`;
+          return {
+            "@type": "ListItem",
+            position: index + 1,
+            item: {
+              "@type": "Product",
+              "@id": url,
+              url,
+              name: `Häfele ${appliance.name}`,
+              sku: appliance.code,
+              brand: { "@type": "Brand", name: "Häfele" },
+              // JSON.stringify drops the key when there is no picture.
+              image: appliance.image
+                ? `${SITE_URL}${appliance.image}`
+                : undefined,
+              offers: {
+                "@type": "Offer",
+                price: appliance.price,
+                priceCurrency: "INR",
+                availability: "https://schema.org/LimitedAvailability",
+                seller: { "@id": BUSINESS_ID },
+              },
+            },
+          };
+        }),
       },
     ],
   };

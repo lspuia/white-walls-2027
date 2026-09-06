@@ -68,7 +68,11 @@ export function ApplianceGrid({
 
       <div className={s.grid}>
         {list.map((appliance) => (
-          <article key={appliance.code} className={s.card}>
+          <article
+            key={appliance.code}
+            id={`art-${appliance.code}`}
+            className={s.card}
+          >
             <div className={s.pic}>
               <span className={s.off}>
                 {percentOff(appliance.mrp, appliance.price)}% off

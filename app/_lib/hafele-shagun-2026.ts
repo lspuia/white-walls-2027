@@ -214,6 +214,42 @@ export function percentOff(mrp: number, price: number) {
   return Math.round((1 - price / mrp) * 100);
 }
 
+/**
+ * The steepest discount in the table, for the "up to N% off" claim. Derived
+ * rather than typed: the handoff said 47%, which was already out of date —
+ * two hoods in its own table were 54% and 55% off.
+ */
+export const MAX_PERCENT_OFF = Math.max(
+  ...APPLIANCES.map((appliance) => percentOff(appliance.mrp, appliance.price)),
+);
+
+/** Words that already say what kind of appliance a model name is. */
+const KIND_WORDS = [
+  "hood",
+  "hob",
+  "induction",
+  "microwave",
+  "oven",
+  "dishwasher",
+  "refrigerator",
+  "fryer",
+  "grill",
+  "drawer",
+];
+
+/**
+ * Alt text for a product picture: brand, model and — unless the model name
+ * already carries it — what the thing is. "Häfele Renata T-90 cooker hood",
+ * but "Häfele Enzo 28L microwave with grill" rather than "… microwave".
+ */
+export function applianceAlt(appliance: Appliance) {
+  const name = appliance.name.toLowerCase();
+  const saysKind = KIND_WORDS.some((word) => name.includes(word));
+  return saysKind
+    ? `Häfele ${appliance.name}`
+    : `Häfele ${appliance.name} ${CATEGORY_SHORT[appliance.category].toLowerCase()}`;
+}
+
 /** The "know more" link on the header, hero and sticky mobile buttons. */
 export const WHATSAPP_INTRO_URL = `https://wa.me/${WHATSAPP_DIAL}?text=${encodeURIComponent(
   "Hi White Walls, I’d like to know more about the Häfele Shagun offer.",

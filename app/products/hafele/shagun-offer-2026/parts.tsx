@@ -1,5 +1,5 @@
 import Image from "next/image";
-import type { Appliance } from "../../../_lib/hafele-shagun-2026";
+import { applianceAlt, type Appliance } from "../../../_lib/hafele-shagun-2026";
 import s from "./shagun.module.css";
 
 /**
@@ -45,7 +45,7 @@ export function ProductPicture({
       <Image
         className={s.picImg}
         src={appliance.image}
-        alt={appliance.name}
+        alt={applianceAlt(appliance)}
         fill
         sizes={sizes}
       />

@@ -7,6 +7,7 @@ import {
   CATEGORY_SHORT,
   COMBOS,
   IMAGE_DIR,
+  MAX_PERCENT_OFF,
   OFFER_PATH,
   WHATSAPP_DIAL,
   WHATSAPP_INTRO_URL,
@@ -54,16 +55,25 @@ const cormorant = Cormorant_Garamond({
   display: "swap",
 });
 
-const PAGE_DESCRIPTION =
-  "Häfele built-in kitchen appliances at Shagun offer prices from White Walls, Aizawl. Combo sets and individual hoods, hobs, ovens, dishwashers and more.";
+/**
+ * Search and share metadata.
+ *
+ * The title is absolute — the layout's "| White Walls Interior Design Studio"
+ * template would push it past 80 characters and search results cut it at
+ * about 60. The description leads with what is searched for (Häfele, kitchen
+ * appliances, Aizawl) and the two hooks the offer is built on. The share
+ * image is this route's own card — see share-card.tsx.
+ */
+const PAGE_TITLE = "Häfele Shagun Offer 2026 | White Walls, Aizawl";
+
+const PAGE_DESCRIPTION = `Häfele built-in kitchen appliances at Shagun offer prices in Aizawl, Mizoram: ${COMBOS.length} combo sets with a fifth appliance for ₹11, and up to ${MAX_PERCENT_OFF}% off MRP on hoods, hobs, ovens, microwaves and dishwashers.`;
 
 export const metadata: Metadata = {
-  // The layout's template appends the studio name.
-  title: "Häfele Shagun Offer 2026 — Built-in Kitchen Appliances",
+  title: { absolute: PAGE_TITLE },
   description: PAGE_DESCRIPTION,
   alternates: { canonical: OFFER_PATH },
   openGraph: {
-    title: `Häfele Shagun Offer 2026 | ${SITE_NAME}`,
+    title: PAGE_TITLE,
     description: PAGE_DESCRIPTION,
     url: OFFER_PATH,
     siteName: SITE_NAME,
@@ -72,7 +82,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: `Häfele Shagun Offer 2026 | ${SITE_NAME}`,
+    title: PAGE_TITLE,
     description: PAGE_DESCRIPTION,
   },
 };
@@ -249,7 +259,7 @@ export default function ShagunOfferPage() {
                     <b>₹11</b>fifth appliance with every set
                   </div>
                   <div>
-                    <b>up to 47%</b>off MRP
+                    <b>up to {MAX_PERCENT_OFF}%</b>off MRP
                   </div>
                 </div>
               </div>
