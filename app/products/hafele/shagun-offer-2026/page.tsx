@@ -56,17 +56,36 @@ const cormorant = Cormorant_Garamond({
 });
 
 /**
+ * The hero's opening line, in three pieces because the phone number between
+ * them is a tel: link on the page. Joined back together they are also the
+ * social description below, so the line a visitor reads and the line Facebook
+ * shows cannot drift apart.
+ */
+const HERO_LINE_BEFORE =
+  "Häfele Kitchen Appliances hovah Festive Offer tha tak kan pe thei e.";
+const HERO_PHONE = "98623 51441";
+const HERO_LINE_AFTER = "ah whatsapp leh phone call in kan biak thei reng e !";
+
+const HERO_LINE = `${HERO_LINE_BEFORE} ${HERO_PHONE} ${HERO_LINE_AFTER}`;
+
+/**
  * Search and share metadata.
  *
  * The title is absolute — the layout's "| White Walls Interior Design Studio"
  * template would push it past 80 characters and search results cut it at
- * about 60. The description leads with what is searched for (Häfele, kitchen
- * appliances, Aizawl) and the two hooks the offer is built on. The share
- * image is this route's own card — see share-card.tsx.
+ * about 60. The share image is this route's own card — see share-card.tsx.
+ *
+ * Search and social carry different descriptions on purpose. `description` is
+ * what Google prints under the result, so it stays English and keyword-led.
+ * The Open Graph and Twitter descriptions are what Facebook and WhatsApp show
+ * when the link is pasted, and that audience is local — so they carry the
+ * page's own Mizo line, the studio's phone number included.
  */
 const PAGE_TITLE = "Häfele Shagun Offer 2026 | White Walls, Aizawl";
 
 const PAGE_DESCRIPTION = `Häfele built-in kitchen appliances at Shagun offer prices in Aizawl, Mizoram: ${COMBOS.length} combo sets with a fifth appliance for ₹11, and up to ${MAX_PERCENT_OFF}% off MRP on hoods, hobs, ovens, microwaves and dishwashers.`;
+
+const SOCIAL_DESCRIPTION = HERO_LINE;
 
 export const metadata: Metadata = {
   title: { absolute: PAGE_TITLE },
@@ -74,7 +93,7 @@ export const metadata: Metadata = {
   alternates: { canonical: OFFER_PATH },
   openGraph: {
     title: PAGE_TITLE,
-    description: PAGE_DESCRIPTION,
+    description: SOCIAL_DESCRIPTION,
     url: OFFER_PATH,
     siteName: SITE_NAME,
     locale: "en_IN",
@@ -83,7 +102,7 @@ export const metadata: Metadata = {
   twitter: {
     card: "summary_large_image",
     title: PAGE_TITLE,
-    description: PAGE_DESCRIPTION,
+    description: SOCIAL_DESCRIPTION,
   },
 };
 
@@ -247,15 +266,14 @@ export default function ShagunOfferPage() {
                 {/* Mizo, on an en-IN page: tagged so screen readers switch
                     voice rather than reading it as English. */}
                 <p className={s.lead} lang="lus">
-                  Häfele Kitchen Appliances hovah Festive Offer tha tak kan pe
-                  thei e.{" "}
+                  {HERO_LINE_BEFORE}{" "}
                   {/* The number is the studio line held in WHATSAPP_DIAL, so
                       the href follows it if that ever changes. Linked for the
                       call: WhatsApp already has its own button below. */}
                   <a className={s.leadTel} href={`tel:+${WHATSAPP_DIAL}`}>
-                    98623 51441
+                    {HERO_PHONE}
                   </a>{" "}
-                  ah whatsapp leh phone call in kan biak thei reng e !
+                  {HERO_LINE_AFTER}
                 </p>
                 <div className={s.cta}>
                   <a
