@@ -244,12 +244,11 @@ export default function ShagunOfferPage() {
                   <br />
                   Offer 2026
                 </h1>
-                <p className={s.lead}>
-                  German-engineered built-in kitchen appliances at festive
-                  prices, supplied in Aizawl by White Walls and installed by
-                  the Häfele service centre. Choose a ready-made combo set and
-                  get a fifth appliance for ₹11, or pick individual pieces from
-                  the full range.
+                {/* Mizo, on an en-IN page: tagged so screen readers switch
+                    voice rather than reading it as English. */}
+                <p className={s.lead} lang="lus">
+                  Häfele Kitchen Appliances hovah Festive Offer tha tak kan pe
+                  thei e.
                 </p>
                 <div className={s.cta}>
                   <a
