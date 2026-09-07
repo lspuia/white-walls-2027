@@ -250,6 +250,32 @@ export function applianceAlt(appliance: Appliance) {
     : `Häfele ${appliance.name} ${CATEGORY_SHORT[appliance.category].toLowerCase()}`;
 }
 
+/**
+ * The share picture's alt text, and the version stamped on its URL.
+ *
+ * Next gives the generated image a URL hash that does not change when the
+ * picture's content does, so Facebook — which caches a link's preview by
+ * image URL — would go on serving the old card indefinitely. Bumping this
+ * changes the URL and makes it fetch the new one.
+ */
+export const SHARE_IMAGE_ALT =
+  "Häfele Shagun Offer 2026 — built-in kitchen appliances at offer prices from White Walls, Aizawl";
+export const SHARE_IMAGE_VERSION = "3";
+
+/**
+ * The offer page's opening line, in Mizo. Three pieces because the phone
+ * number between them is a tel: link on the page; joined by HERO_LINE for
+ * the share card and the social descriptions, so the words a visitor reads,
+ * the words on the shared picture and the words Facebook quotes are one text.
+ */
+export const HERO_LINE_BEFORE =
+  "Häfele Kitchen Appliances hovah Festive Offer tha tak kan pe thei e.";
+export const HERO_PHONE = "98623 51441";
+export const HERO_LINE_AFTER =
+  "ah whatsapp leh phone call in kan biak thei reng e !";
+
+export const HERO_LINE = `${HERO_LINE_BEFORE} ${HERO_PHONE} ${HERO_LINE_AFTER}`;
+
 /** The "know more" link on the header, hero and sticky mobile buttons. */
 export const WHATSAPP_INTRO_URL = `https://wa.me/${WHATSAPP_DIAL}?text=${encodeURIComponent(
   "Hi White Walls, I’d like to know more about the Häfele Shagun offer.",

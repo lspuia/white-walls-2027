@@ -6,9 +6,15 @@ import {
   APPLIANCES,
   CATEGORY_SHORT,
   COMBOS,
+  HERO_LINE,
+  HERO_LINE_AFTER,
+  HERO_LINE_BEFORE,
+  HERO_PHONE,
   IMAGE_DIR,
   MAX_PERCENT_OFF,
   OFFER_PATH,
+  SHARE_IMAGE_ALT,
+  SHARE_IMAGE_VERSION,
   WHATSAPP_DIAL,
   WHATSAPP_INTRO_URL,
   comboAppliances,
@@ -56,19 +62,6 @@ const cormorant = Cormorant_Garamond({
 });
 
 /**
- * The hero's opening line, in three pieces because the phone number between
- * them is a tel: link on the page. Joined back together they are also the
- * social description below, so the line a visitor reads and the line Facebook
- * shows cannot drift apart.
- */
-const HERO_LINE_BEFORE =
-  "Häfele Kitchen Appliances hovah Festive Offer tha tak kan pe thei e.";
-const HERO_PHONE = "98623 51441";
-const HERO_LINE_AFTER = "ah whatsapp leh phone call in kan biak thei reng e !";
-
-const HERO_LINE = `${HERO_LINE_BEFORE} ${HERO_PHONE} ${HERO_LINE_AFTER}`;
-
-/**
  * Search and share metadata.
  *
  * The title is absolute — the layout's "| White Walls Interior Design Studio"
@@ -87,6 +80,18 @@ const PAGE_DESCRIPTION = `Häfele built-in kitchen appliances at Shagun offer pr
 
 const SOCIAL_DESCRIPTION = HERO_LINE;
 
+/**
+ * Declared rather than left to the file convention: Next's own URL hash does
+ * not move when the picture changes, and Facebook caches by image URL. The
+ * version in the query is what makes it fetch a redrawn card.
+ */
+const SHARE_IMAGE = {
+  url: `${OFFER_PATH}/opengraph-image?v=${SHARE_IMAGE_VERSION}`,
+  width: 1200,
+  height: 630,
+  alt: SHARE_IMAGE_ALT,
+};
+
 export const metadata: Metadata = {
   title: { absolute: PAGE_TITLE },
   description: PAGE_DESCRIPTION,
@@ -98,11 +103,13 @@ export const metadata: Metadata = {
     siteName: SITE_NAME,
     locale: "en_IN",
     type: "website",
+    images: [SHARE_IMAGE],
   },
   twitter: {
     card: "summary_large_image",
     title: PAGE_TITLE,
     description: SOCIAL_DESCRIPTION,
+    images: [SHARE_IMAGE],
   },
 };
 

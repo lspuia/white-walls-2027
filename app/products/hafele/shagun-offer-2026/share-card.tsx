@@ -3,7 +3,9 @@ import { readFile } from "node:fs/promises";
 import { join } from "node:path";
 import {
   COMBOS,
+  HERO_LINE,
   IMAGE_DIR,
+  SHARE_IMAGE_ALT,
   MAX_PERCENT_OFF,
 } from "../../../_lib/hafele-shagun-2026";
 
@@ -14,8 +16,8 @@ import {
  * It is the page's hero folded into 1200×630 — both logos, the headline, the
  * three facts and the four series pictures — rather than the studio-wide card
  * in _lib/og.tsx, because a link to a sale should look like the sale. The
- * hero's supporting sentence is deliberately not repeated here: the facts row
- * below the headline already says what the offer is.
+ * It carries the page's Mizo line because Facebook's link card renders the
+ * image, the domain and the title but not og:description.
  *
  * Satori (which draws this) only decodes PNG and JPEG, so the pictures come
  * from the PNG copies in public/…/share/, and it cannot reach the fonts
@@ -26,8 +28,7 @@ import {
  */
 
 export const SHARE_SIZE = { width: 1200, height: 630 };
-export const SHARE_ALT =
-  "Häfele Shagun Offer 2026 — built-in kitchen appliances at offer prices from White Walls, Aizawl";
+export const SHARE_ALT = SHARE_IMAGE_ALT;
 export const SHARE_CONTENT_TYPE = "image/png";
 
 const INK = "#1a1714";
@@ -78,7 +79,7 @@ async function googleFont(
  * lists it as a fallback.
  */
 const SANS_GLYPHS =
-  "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789 %·,.&-—äöüÄÖÜ";
+  "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789 %·,.&-—!äöüÄÖÜ";
 
 type Font = { name: string; data: ArrayBuffer; weight: 400 | 500 | 600; style: "normal" | "italic" };
 
@@ -180,7 +181,7 @@ export async function renderShareCard() {
                 display: "flex",
                 flexWrap: "wrap",
                 ...serif,
-                fontSize: 82,
+                fontSize: 74,
                 fontWeight: 600,
                 lineHeight: 0.98,
                 letterSpacing: -1,
@@ -191,12 +192,29 @@ export async function renderShareCard() {
               <span style={{ fontStyle: "italic", color: RED }}>Shagun</span>
               <span style={{ width: "100%" }}>Offer 2026</span>
             </div>
+            {/* The page's own Mizo line, on the picture. Facebook's link card
+                shows the image, the domain and the title but not the
+                description, so a line that has to be seen when the link is
+                posted has to be drawn here rather than left to og:description. */}
+            <div
+              style={{
+                marginTop: 20,
+                /* Satori has no balanced wrapping, so the size is chosen to
+                   land the line evenly rather than strand its last word. */
+                fontSize: 19,
+                color: "#3d3833",
+                lineHeight: 1.4,
+                maxWidth: 628,
+              }}
+            >
+              {HERO_LINE}
+            </div>
             <div
               style={{
                 display: "flex",
                 gap: 38,
-                marginTop: 34,
-                paddingTop: 24,
+                marginTop: 24,
+                paddingTop: 22,
                 borderTop: `1px solid ${LINE}`,
               }}
             >
