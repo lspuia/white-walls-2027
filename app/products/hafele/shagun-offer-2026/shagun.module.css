@@ -8,6 +8,9 @@
  */
 
 .page {
+  /* Room under the footer for the floating button to sit clear of the terms. */
+  padding-bottom: 96px;
+
   --ink: #1a1714;
   --paper: #ffffff;
   --stone: #f3f1ec;
@@ -680,9 +683,42 @@
   color: var(--ink);
 }
 
-/* ── Sticky mobile CTA ─────────────────────────────────────────────────── */
-.mobCta {
-  display: none;
+/* ── Floating WhatsApp button ──────────────────────────────────────────── */
+/* Present at every width. It matters most on a phone, where the header stops
+   sticking and the jump bar takes its place, but the page is long enough at
+   any size that a fixed way to start a chat earns its corner. */
+.waFab {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: fixed;
+  right: 20px;
+  /* Clears the home indicator on phones that have one. */
+  bottom: max(20px, env(safe-area-inset-bottom));
+  z-index: 30;
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  background: var(--wa);
+  box-shadow: 0 8px 24px rgba(26, 23, 20, 0.3);
+  text-decoration: none;
+}
+
+/* White on the brand green, rather than the green-on-black of the inline
+   buttons — here the glyph is the whole button, not an icon beside a label. */
+.waFab svg {
+  width: 34px;
+  height: 34px;
+  fill: #fff;
+}
+
+.waFab:hover {
+  background: #1fba5a;
+}
+
+.waFab:focus-visible {
+  outline: 2px solid var(--ink);
+  outline-offset: 3px;
 }
 
 /* ── Responsive ────────────────────────────────────────────────────────── */
@@ -707,10 +743,6 @@
 }
 
 @media (max-width: 760px) {
-  .page {
-    padding-bottom: 80px;
-  }
-
   /* The jump bar takes over the sticking here — see .jump below. */
   .header {
     position: static;
@@ -848,19 +880,29 @@
     grid-template-columns: 1fr;
   }
 
-  .mobCta {
-    display: flex;
-    position: fixed;
-    left: 16px;
+  /* Slightly tucked in, where thumbs and screen edges are tighter. */
+  .waFab {
     right: 16px;
-    bottom: 16px;
-    z-index: 30;
-    justify-content: center;
-    box-shadow: 0 10px 30px rgba(26, 23, 20, 0.25);
+    bottom: max(16px, env(safe-area-inset-bottom));
+    width: 58px;
+    height: 58px;
+  }
+
+  .waFab svg {
+    width: 31px;
+    height: 31px;
   }
 }
 
 @media (prefers-reduced-motion: no-preference) {
+  .waFab {
+    transition: transform 0.2s ease, background 0.2s ease;
+  }
+
+  .waFab:hover {
+    transform: scale(1.06);
+  }
+
   .card .picImg,
   .item .picImg {
     transition: transform 0.35s ease;

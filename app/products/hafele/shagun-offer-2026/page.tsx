@@ -446,7 +446,8 @@ export default function ShagunOfferPage() {
           </div>
           <div className={s.wrap}>
             <div className={s.terms} id="terms">
-              <strong>Offer terms.</strong> Prices shown are Häfele India MRP
+              <strong>Offer terms.</strong>{" "}
+              Prices shown are Häfele India MRP
               and Shagun offer prices in Indian Rupees, inclusive of GST. Offer
               valid for a limited period and while stocks last. Combo sets must
               be purchased together; the ₹11 appliance is available only with
@@ -461,13 +462,16 @@ export default function ShagunOfferPage() {
           </div>
         </footer>
 
+        {/* Icon only, so it needs a name of its own for anyone who cannot
+            see it. */}
         <a
-          className={`${s.btn} ${s.btnWa} ${s.mobCta}`}
+          className={s.waFab}
           href={WHATSAPP_INTRO_URL}
           target="_blank"
           rel="noopener"
+          aria-label="Chat with White Walls on WhatsApp about the Häfele Shagun offer"
         >
-          Get a quote on WhatsApp
+          <WhatsAppIcon />
         </a>
       </div>
     </>
