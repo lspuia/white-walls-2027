@@ -188,11 +188,16 @@
   font-weight: 500;
 }
 
+/* Now a single short line rather than a paragraph, so it is sized to carry
+   the hero on its own — clamped so it stays proportionate on a phone. */
 .lead {
-  font-size: 19px;
+  font-size: clamp(21px, 1.9vw, 25px);
   max-width: 52ch;
   margin: 24px 0 0;
   color: #3d3833;
+  /* One sentence over two lines: balance them rather than leaving the last
+     two words stranded on a line of their own. */
+  text-wrap: balance;
 }
 
 .cta {
