@@ -248,7 +248,14 @@ export default function ShagunOfferPage() {
                     voice rather than reading it as English. */}
                 <p className={s.lead} lang="lus">
                   Häfele Kitchen Appliances hovah Festive Offer tha tak kan pe
-                  thei e.
+                  thei e.{" "}
+                  {/* The number is the studio line held in WHATSAPP_DIAL, so
+                      the href follows it if that ever changes. Linked for the
+                      call: WhatsApp already has its own button below. */}
+                  <a className={s.leadTel} href={`tel:+${WHATSAPP_DIAL}`}>
+                    98623 51441
+                  </a>{" "}
+                  ah whatsapp leh phone call in kan biak thei reng e !
                 </p>
                 <div className={s.cta}>
                   <a
