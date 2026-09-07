@@ -136,9 +136,10 @@ export default function ProductsPage() {
           <h3>Häfele Shagun Offer 2026</h3>
           <p>
             Häfele&apos;s built-in kitchen appliances — hoods, hobs, ovens,
-            microwaves and dishwashers — at festive prices, supplied and
-            installed in Aizawl. Ten combo sets add a fifth appliance for ₹11,
-            and every piece in the range is listed with its MRP and offer price.
+            microwaves and dishwashers — at festive prices from our Aizawl
+            showroom, with installation by the Häfele service centre. Ten combo
+            sets add a fifth appliance for ₹11, and every piece in the range is
+            listed with its MRP and offer price.
           </p>
           <Link className="btn" href={OFFER_PATH}>
             See the Häfele offer

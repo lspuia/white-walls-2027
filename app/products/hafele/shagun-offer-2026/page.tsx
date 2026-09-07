@@ -246,9 +246,10 @@ export default function ShagunOfferPage() {
                 </h1>
                 <p className={s.lead}>
                   German-engineered built-in kitchen appliances at festive
-                  prices, delivered and installed in Aizawl by White Walls.
-                  Choose a ready-made combo set and get a fifth appliance for
-                  ₹11, or pick individual pieces from the full range.
+                  prices, supplied in Aizawl by White Walls and installed by
+                  the Häfele service centre. Choose a ready-made combo set and
+                  get a fifth appliance for ₹11, or pick individual pieces from
+                  the full range.
                 </p>
                 <div className={s.cta}>
                   <a
@@ -319,11 +320,11 @@ export default function ShagunOfferPage() {
           <div className={s.why}>
             <div className={s.wrap}>
               <div>
-                <h3>Supplied and installed locally</h3>
+                <h3>Bought locally, installed by Häfele</h3>
                 <p>
-                  White Walls is an authorised Häfele reseller in Aizawl. We
-                  handle delivery, installation and after-sales coordination so
-                  you deal with one team.
+                  White Walls is an authorised Häfele reseller in Aizawl: you
+                  buy here, and we handle the delivery. Installation is carried
+                  out by Häfele&apos;s own service centre.
                 </p>
               </div>
               <div>
@@ -418,8 +419,9 @@ export default function ShagunOfferPage() {
               and Shagun offer prices in Indian Rupees, inclusive of GST. Offer
               valid for a limited period and while stocks last. Combo sets must
               be purchased together; the ₹11 appliance is available only with
-              the full set. Delivery, installation, ducting, chimney extensions
-              and any civil work are charged separately. Product images are
+              the full set. Installation is carried out by the Häfele service
+              centre and is charged separately, as are delivery, ducting,
+              chimney extensions and any civil work. Product images are
               representative of the series; finishes and sizes as per the model
               name. Warranty as per Häfele India&apos;s warranty policy. Häfele
               and the Häfele logo are trademarks of Häfele SE &amp; Co KG.
