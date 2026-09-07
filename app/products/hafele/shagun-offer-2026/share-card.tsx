@@ -13,7 +13,9 @@ import {
  *
  * It is the page's hero folded into 1200×630 — both logos, the headline, the
  * three facts and the four series pictures — rather than the studio-wide card
- * in _lib/og.tsx, because a link to a sale should look like the sale.
+ * in _lib/og.tsx, because a link to a sale should look like the sale. The
+ * hero's supporting sentence is deliberately not repeated here: the facts row
+ * below the headline already says what the offer is.
  *
  * Satori (which draws this) only decodes PNG and JPEG, so the pictures come
  * from the PNG copies in public/…/share/, and it cannot reach the fonts
@@ -191,21 +193,10 @@ export async function renderShareCard() {
             </div>
             <div
               style={{
-                marginTop: 18,
-                fontSize: 23,
-                color: "#3d3833",
-                lineHeight: 1.3,
-              }}
-            >
-              Built-in kitchen appliances at festive prices, supplied and
-              installed in Aizawl by White Walls.
-            </div>
-            <div
-              style={{
                 display: "flex",
                 gap: 38,
-                marginTop: 26,
-                paddingTop: 22,
+                marginTop: 34,
+                paddingTop: 24,
                 borderTop: `1px solid ${LINE}`,
               }}
             >
